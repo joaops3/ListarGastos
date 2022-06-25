@@ -1,0 +1,60 @@
+.titulo {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.flex-button {
+  display: flex;
+  justify-content: right;
+}
+.flex-icon {
+  display: flex;
+  justify-content: center;
+  padding-top: 2px;
+}
+
+.t-item {
+  border-bottom: 1px solid #727272;
+  text-transform: uppercase;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.link.cadastrar {
+  color: black;
+
+  &:hover {
+    color: #d8a615;
+  }
+}
+
+form {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .input,
+  select {
+    border: 1px solid black;
+    border-radius: 4px;
+    width: 70%;
+    height: 7vh;
+    padding: 0 5px;
+    font-size: 15px;
+    margin-top: 15px;
+    display: block;
+  }
+
+  select {
+    width: 50%;
+  }
+}
+
+.icon {
+  text-align: center;
+}

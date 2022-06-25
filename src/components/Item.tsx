@@ -1,0 +1,49 @@
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import PaidIcon from "@mui/icons-material/Paid";
+import { Link } from "react-router-dom";
+import {colors} from "../styles/colors"
+import {item} from "../types"
+
+import * as C from "../styles/styled";
+
+const Item = ({ name, date, type, descricao, value, id, del }: item) => {
+  return (
+    <C.item>
+      <div className="flex-button">
+        <C.button color={"#000"} text={"#fff"}>
+          <Link to={`/editar${id}`} className="link">
+            <EditIcon></EditIcon>
+          </Link>
+        </C.button>
+        <C.button color={colors.red} text={"#000"} onClick={() => del(id)}>
+          <DeleteIcon></DeleteIcon>
+        </C.button>
+      </div>
+      <div className="flex-icon">
+        {type === "ativo" ? (
+          <AttachMoneyIcon style={{ color: colors.iconGreen }} />
+        ) : (
+          <PaidIcon style={{ color: colors.iconRed }} />
+        )}
+      </div>
+
+      <h3 className="titulo t-item">{name}</h3>
+      <C.item_text>
+        Data: <span>{date}</span>
+      </C.item_text>
+      <C.item_text>
+        tipo: <span>{type}</span>
+      </C.item_text>
+      <C.item_text descricao={true} className={"descricao"}>
+        descrição: <span>{descricao}</span>
+      </C.item_text>
+      <C.item_text type={type} className={"v"}>
+        valor: <span className="valor">R$ {value}</span>
+      </C.item_text>
+    </C.item>
+  );
+};
+
+export default Item;
