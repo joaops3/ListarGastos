@@ -5,6 +5,7 @@ import {useState } from "react";
 import {addDoc, collection} from "firebase/firestore"
 import {database} from "../firebase"
 
+
 const Cadastrar = () => {
 
   const dataCollectionRef = collection(database, "card")

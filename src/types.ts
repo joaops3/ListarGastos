@@ -6,5 +6,6 @@ export interface item {
     value?: number,
     id?: string,
     del?: any
+    data?:any
 
 }

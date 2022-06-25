@@ -6,7 +6,7 @@ import { collection, getDocs, doc, deleteDoc, DocumentData } from "firebase/fire
 import {item} from "../types"
 
 const Main = () => {
-  const [cards, setCards] = useState<item[]>([]);
+  const [cards, setCards] = useState<item[] >([]);
   const dataCollectionRef = collection(database, "card");
   const [deletar, setDeletar] = useState(0)
 
