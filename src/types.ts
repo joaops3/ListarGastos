@@ -5,7 +5,6 @@ export interface item {
     descricao?: string,
     value?: number,
     id?: string,
-    del?: any
-    data?:any
-
+    del?: any,
+    data?: any
 }

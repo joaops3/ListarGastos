@@ -1,46 +1,46 @@
 import * as C from "../styles/styled";
 import { colors } from "../styles/colors";
 import InputMask from "react-input-mask";
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
   collection,
   getDocs,
   updateDoc,
   doc,
   DocumentData,
-  DocumentReference,
 } from "firebase/firestore";
 import { database } from "../firebase";
 import { useParams } from "react-router";
-import {item} from "../types"
+import { item } from "../types";
 
 const Editar = () => {
-  const params = useParams();
+  const params = useParams<string>();
   const [cards, setCards] = useState<item>();
   const dataCollectionRef = collection(database, "card");
 
   useEffect(() => {
     const getData = async () => {
-        
-      const data = await getDocs<DocumentData>(dataCollectionRef).then((data) => {
-        data.docs.forEach((doc: item) => {
-          if (doc.id === params.id) {
-            setCards({ ...doc.data(), id: doc.id });
-          }
-        });
-      });
+      const data = await getDocs<DocumentData>(dataCollectionRef).then(
+        (data) => {
+          data.docs.forEach((doc: item) => {
+            if (doc.id === params.id) {
+              setCards({ ...doc.data(), id: doc.id });
+            }
+          });
+        }
+      );
     };
     getData();
   }, []);
 
   async function editarUser(e: React.MouseEvent<HTMLElement>) {
-    if(cards === undefined){
-        return
+    if (cards === undefined) {
+      return;
     }
     e.preventDefault();
-    const item = doc<DocumentReference>(database, "card", params.id);
-    await updateDoc(item, cards);
-   
+    // @ts-ignore
+    const item = doc(database, "card", params.id);
+    await updateDoc<any>(item, cards);
   }
   return (
     <main>
@@ -67,25 +67,36 @@ const Editar = () => {
           ></InputMask>
           <select
             value={cards?.type}
-            onChange={(e) => setCards({ ...cards, type: e.target.value })}
+            onChange={(e) =>
+              e.target.value.length > 150
+                ? alert("maximo de caracteres 150")
+                : setCards({ ...cards, type: e.target.value })
+            }
           >
             <option value="">Selecione</option>
             <option value="ativo">Ativo</option>
             <option value="passivo">Passivo</option>
           </select>
-          <InputMask
-            type="text"
-            mask={""}
-            placeholder="Descrição"
-            onChange={(e) => setCards({ ...cards, descricao: e.target.value })}
-            name="descricao"
-            value={cards?.descricao}
-            className="input"
-          ></InputMask>
+          <C.formGroup>
+            <InputMask
+              type="text"
+              mask={""}
+              placeholder="Descrição"
+              onChange={(e) =>
+                setCards({ ...cards, descricao: e.target.value })
+              }
+              name="descricao"
+              value={cards?.descricao}
+              className="input"
+            ></InputMask>
+            <C.underText>A descrição deve ter max 150 caracteres</C.underText>
+          </C.formGroup>
           <InputMask
             type="number"
             mask={""}
-            onChange={(e) => setCards({ ...cards, value: parseInt(e.target.value) })}
+            onChange={(e) =>
+              setCards({ ...cards, value: parseInt(e.target.value) })
+            }
             style={{ textDecoration: "none" }}
             name="value"
             placeholder="Valor"

@@ -57,12 +57,16 @@ export const container_cadastrar = styled.div`
     margin-top: 25px;
     display:flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
-    width: 40vw;
+    width: 50vw;
     border: 2px solid black;
     border-radius: 15px;
-    background: #FAFAF9
+    background: #FAFAF9;
+
+    @media(max-width: 700px){
+        width: 80vw;
+    }
 
 `
 
@@ -130,4 +134,20 @@ font-weight: bold;
 export const title = styled.h1`
     text-align: center;
     margin: 20px 0;
+`
+
+export const underText = styled.p`
+    font-size: 15px;
+    color: #838382;
+    margin-top: 5px;
+    margin-left: 1px;
+    
+` 
+
+export const formGroup = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+
 `
