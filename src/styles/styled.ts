@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { colors } from "./colors";
 
 interface props {
-    color?:string, 
+    color?: React.CSSProperties, 
     text?:string,
     descricao?:boolean,
     type?: string,
@@ -54,7 +54,7 @@ export const container = styled.div<props>`
 `
 export const container_cadastrar = styled.div`
     margin: 0 auto;
-    margin-top: 25px;
+    margin: 25px auto;
     display:flex;
     justify-content: center;
     flex-direction: column;
@@ -150,4 +150,11 @@ export const formGroup = styled.div`
     justify-content: flex-start;
     flex-direction: column;
 
+`
+
+export const ErrorsMessage = styled.p`
+    color: ${colors.red};
+    font-size: 13px;
+    padding-top: 8px;
+    transition: 0.5s;
 `

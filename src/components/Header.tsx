@@ -2,7 +2,7 @@ import * as C from "../styles/styled"
 import { Link } from "react-router-dom"
 import { colors } from "../styles/colors";
 
-const Header = () => {
+const Header: React.FC = () => {
     return ( 
         <header>
             <C.Nav>
