@@ -2,9 +2,9 @@ import styled from "styled-components"
 import { colors } from "./colors";
 
 interface props {
-    color?: React.CSSProperties, 
-    text?:string,
-    descricao?:boolean,
+    color?: React.CSSProperties,
+    text?: string,
+    descricao?: boolean,
     type?: string,
     justify?: string,
 }
@@ -63,6 +63,7 @@ export const container_cadastrar = styled.div`
     border: 2px solid black;
     border-radius: 15px;
     background: #FAFAF9;
+    box-sizing: content-box;
 
     @media(max-width: 700px){
         width: 80vw;
@@ -121,7 +122,7 @@ font-weight: bold;
     word-wrap: break-word;
 
 } 
-.valor{ color: ${props => props.type === "ativo"? colors.iconGreen : colors.red};
+.valor{ color: ${props => props.type === "ativo" ? colors.iconGreen : colors.red};
 
 }
 
@@ -142,7 +143,7 @@ export const underText = styled.p`
     margin-top: 5px;
     margin-left: 1px;
     
-` 
+`
 
 export const formGroup = styled.div`
     width: 100%;
@@ -157,4 +158,36 @@ export const ErrorsMessage = styled.p`
     font-size: 13px;
     padding-top: 8px;
     transition: 0.5s;
+`
+
+export const Modal = styled.div`
+    width: 200px;
+    height: 100px;
+    margin: 0 auto;
+    border: 2px solid ${colors.sucess};
+    background-color: ${colors.sucess}DD ;
+    border-radius: 2px;
+    position: absolute;
+    top: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    z-index: 999;
+    
+   `
+
+export const ButtonContainer = styled.div`
+    display: flex;
+    justify-content: right;
+    width: 100%;
+    transition: ease 0.5s;
+`
+
+export const ModalText = styled.div`
+    padding-top: 5px;
+    width: 100%;
+    height: 80%;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
 `

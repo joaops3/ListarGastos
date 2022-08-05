@@ -3,10 +3,6 @@
   margin: 20px 0;
 }
 
-.flex-button {
-  display: flex;
-  justify-content: right;
-}
 .flex-icon {
   display: flex;
   justify-content: center;
@@ -37,7 +33,6 @@ form {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
 
   .input,
   select {
@@ -58,4 +53,16 @@ form {
 
 .icon {
   text-align: center;
+}
+
+.iconclose {
+  font-weight: bold;
+  width: 25px;
+  height: 25px;
+  padding: 5px;
+  font-weight: bold;
+
+  &:hover {
+    cursor: pointer;
+  }
 }

@@ -4,7 +4,8 @@ type color = {
     red: string,
     iconRed: string,
     iconGreen: string,
-    home: string
+    home: string,
+    sucess: string
 
 }
 export const colors: color ={ 
@@ -13,5 +14,6 @@ export const colors: color ={
     red: "#DD2910",
     iconRed: "#B2212E",
     iconGreen: "#368A57",
-    home: "#fff"
+    home: "#fff",
+    sucess: "#7EE15B"
 }

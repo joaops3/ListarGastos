@@ -16,6 +16,7 @@ import { ItemInterface } from "../types";
 import CurrencyInput from "react-currency-input-field";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { onlyNumbers, parseDate, formatDate } from "../helpers/helpers";
+import Modal from "./Modal";
 
 interface Form {
   params?: string;
@@ -26,7 +27,11 @@ interface Form {
 const Form: React.FC<Form> = ({ params, typeOperation, data }) => {
   const dataCollectionRef = collection(database, "card");
   const [cards, setCards] = useState<ItemInterface | undefined>();
-
+  const [modal, setModal] = useState<boolean>(false);
+  const closeModal = () => {
+    setModal(false);
+    console.log(modal);
+  };
   const {
     control,
     handleSubmit,
@@ -50,6 +55,7 @@ const Form: React.FC<Form> = ({ params, typeOperation, data }) => {
     }
     dataClone.value = onlyNumbers(dataClone.value);
     dataClone.date = birthDate;
+    //CREATE
     if (typeOperation === "cadastrar") {
       await addDoc(dataCollectionRef, {
         name: dataClone.name,
@@ -63,11 +69,13 @@ const Form: React.FC<Form> = ({ params, typeOperation, data }) => {
       setValue("data.type", "");
       setValue("data.descricao", "");
       setValue("data.value", "");
-      alert("registrado com sucesso");
+      setModal(true);
     } else {
+      //EDIT
       // @ts-ignore
       const item = doc(database, "card", params);
       await updateDoc<any>(item, dataClone);
+      setModal(true);
     }
   };
 
@@ -77,6 +85,7 @@ const Form: React.FC<Form> = ({ params, typeOperation, data }) => {
 
   return (
     <main>
+      <Modal modalOn={modal} setModal={closeModal}></Modal>
       <C.container_cadastrar>
         <C.title>
           {typeOperation == "cadastrar" ? "CADASTRAR" : "EDITAR"}
@@ -162,7 +171,7 @@ const Form: React.FC<Form> = ({ params, typeOperation, data }) => {
                   }}
                 />
               )}
-              rules={{maxLength: 50 }}
+              rules={{ maxLength: 50 }}
             />
             <C.underText>A descrição deve ter max 150 caracteres</C.underText>
           </C.formGroup>
@@ -179,6 +188,8 @@ const Form: React.FC<Form> = ({ params, typeOperation, data }) => {
                 defaultValue={getValues("data.value")}
                 decimalSeparator={","}
                 groupSeparator={"."}
+                fixedDecimalLength={2}
+                decimalScale={2}
                 prefix={"R$"}
                 allowDecimals={true}
                 onValueChange={(value) => {

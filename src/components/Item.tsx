@@ -6,14 +6,13 @@ import { Link } from "react-router-dom";
 import {colors} from "../styles/colors"
 import {ItemInterface} from "../types"
 import {addMoneyRealMask, formatDate} from "../helpers/helpers"
+import React, {memo} from "react"
 import * as C from "../styles/styled";
 
 const Item: React.FC<ItemInterface> = ({ name, date, type, descricao, value, id, del }) => {
   return (
-    //@ts-ignore
     <C.item>
-      {console.log("minha data",date)}
-      <div className="flex-button">
+      <C.ButtonContainer>
         <C.button color={"#000"} text={"#fff"}>
           <Link to={`/editar${id}`} className="link">
             <EditIcon></EditIcon>
@@ -22,7 +21,7 @@ const Item: React.FC<ItemInterface> = ({ name, date, type, descricao, value, id,
         <C.button color={colors.red} text={"#000"} onClick={() => del(id)}>
           <DeleteIcon></DeleteIcon>
         </C.button>
-      </div>
+        </C.ButtonContainer>
       <div className="flex-icon">
         {type === "ativo" ? (
           <AttachMoneyIcon style={{ color: colors.iconGreen }} />
@@ -48,4 +47,4 @@ const Item: React.FC<ItemInterface> = ({ name, date, type, descricao, value, id,
   );
 };
 
-export default Item;
+export default React.memo(Item);
