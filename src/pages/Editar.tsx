@@ -9,8 +9,9 @@ import {
 } from "firebase/firestore";
 import { database } from "../firebase";
 import { useParams } from "react-router";
-import { ItemInterface} from "../types";
+import { ItemInterface } from "../types";
 import Form from "../components/Form";
+import { formatDate } from "../helpers/helpers";
 const Editar = () => {
   const params = useParams<string>();
   const dataCollectionRef = collection(database, "card");
@@ -20,7 +21,11 @@ const Editar = () => {
     const data = await getDocs<DocumentData>(dataCollectionRef).then((data) => {
       data.docs.forEach((doc: ItemInterface) => {
         if (doc.id === params.id) {
-          setData({ ...doc.data(), id: doc.id });
+          setData({
+            ...doc.data(),
+            date: formatDate(new Date(doc.data().date), "dd/mm/yyyy"),
+            id: doc.id,
+          });
         }
       });
     });
@@ -30,7 +35,7 @@ const Editar = () => {
   }, [getData]);
   return (
     <>
-      <Form typeOperation ="edit" params={params.id} data={data}></Form>
+      <Form typeOperation="edit" params={params.id} data={data}></Form>
     </>
   );
 };

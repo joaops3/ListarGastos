@@ -8,7 +8,7 @@ const firebaseConfig = {
   authDomain: "orcamentos-e145e.firebaseapp.com",
   projectId: "orcamentos-e145e",
   storageBucket: "orcamentos-e145e.appspot.com",
-  messagingSenderId: "516495501889",
+  messagingSenderId: process.env.REACT_APP_messagingSenderId,
   appId: process.env.REACT_APP_appId
 };
 

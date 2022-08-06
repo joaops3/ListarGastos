@@ -6,31 +6,27 @@ import {
   addDoc,
   collection,
   updateDoc,
-  getDocs,
-  DocumentData,
   doc,
 } from "firebase/firestore";
 import { database } from "../firebase";
-import { useParams } from "react-router";
 import { ItemInterface } from "../types";
 import CurrencyInput from "react-currency-input-field";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { onlyNumbers, parseDate, formatDate } from "../helpers/helpers";
 import Modal from "./Modal";
 
-interface Form {
+interface FormInterface {
   params?: string;
   typeOperation?: "cadastrar" | "edit";
   data?: ItemInterface;
 }
 
-const Form: React.FC<Form> = ({ params, typeOperation, data }) => {
+const Form: React.FC<FormInterface> = ({ params, typeOperation, data }) => {
   const dataCollectionRef = collection(database, "card");
   const [cards, setCards] = useState<ItemInterface | undefined>();
   const [modal, setModal] = useState<boolean>(false);
   const closeModal = () => {
     setModal(false);
-    console.log(modal);
   };
   const {
     control,
@@ -46,36 +42,41 @@ const Form: React.FC<Form> = ({ params, typeOperation, data }) => {
   };
 
   const onSubmit: SubmitHandler<ItemInterface> = async (data) => {
-    let dataClone = Object.assign({}, data.data);
-    let birthDate;
-    if (typeof dataClone.date === "object") {
-      birthDate = formatDate(new Date(dataClone.date), "yyyy-mm-dd");
-    } else {
-      birthDate = parseDate(dataClone.date);
-    }
-    dataClone.value = onlyNumbers(dataClone.value);
-    dataClone.date = birthDate;
-    //CREATE
-    if (typeOperation === "cadastrar") {
-      await addDoc(dataCollectionRef, {
-        name: dataClone.name,
-        date: dataClone.date,
-        type: dataClone.type,
-        descricao: dataClone.descricao,
-        value: dataClone.value,
-      });
-      setValue("data.name", "");
-      setValue("data.date", "");
-      setValue("data.type", "");
-      setValue("data.descricao", "");
-      setValue("data.value", "");
-      setModal(true);
-    } else {
-      //EDIT
-      // @ts-ignore
-      const item = doc(database, "card", params);
-      await updateDoc<any>(item, dataClone);
-      setModal(true);
+    if(process.env.REACT_APP_SECRET ==="ADMIN"){
+
+      let dataClone = Object.assign({}, data.data);
+      let birthDate;
+      if (typeof dataClone.date === "object") {
+        birthDate = formatDate(new Date(dataClone.date), "yyyy-mm-dd");
+      } else {
+        birthDate = parseDate(dataClone.date);
+      }
+      dataClone.value = onlyNumbers(dataClone.value);
+      dataClone.date = birthDate;
+      if (dataClone.descricao === undefined || dataClone.descricao === null) dataClone.descricao = "";
+       
+      //CREATE
+      if (typeOperation === "cadastrar") {
+        await addDoc(dataCollectionRef, {
+          name: dataClone.name,
+          date: dataClone.date,
+          type: dataClone.type,
+          descricao: dataClone.descricao,
+          value: dataClone.value,
+        });
+        setValue("data.name", "");
+        setValue("data.date", "");
+        setValue("data.type", "");
+        setValue("data.descricao", "");
+        setValue("data.value", "");
+        setModal(true);
+      } else {
+        //EDIT
+        // @ts-ignore
+        const item = doc(database, "card", params);
+        await updateDoc<any>(item, dataClone);
+        setModal(true);
+      }
     }
   };
 
@@ -88,7 +89,7 @@ const Form: React.FC<Form> = ({ params, typeOperation, data }) => {
       <Modal modalOn={modal} setModal={closeModal}></Modal>
       <C.container_cadastrar>
         <C.title>
-          {typeOperation == "cadastrar" ? "CADASTRAR" : "EDITAR"}
+          {typeOperation === "cadastrar" ? "CADASTRAR" : "EDITAR"}
         </C.title>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Controller

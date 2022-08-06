@@ -3,13 +3,21 @@ import EditIcon from "@mui/icons-material/Edit";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import PaidIcon from "@mui/icons-material/Paid";
 import { Link } from "react-router-dom";
-import {colors} from "../styles/colors"
-import {ItemInterface} from "../types"
-import {addMoneyRealMask, formatDate} from "../helpers/helpers"
-import React, {memo} from "react"
+import { colors } from "../styles/colors";
+import { ItemInterface } from "../types";
+import { addMoneyRealMask, formatDate } from "../helpers/helpers";
+import React, { memo } from "react";
 import * as C from "../styles/styled";
 
-const Item: React.FC<ItemInterface> = ({ name, date, type, descricao, value, id, del }) => {
+const Item: React.FC<ItemInterface> = ({
+  name,
+  date,
+  type,
+  descricao,
+  value,
+  id,
+  del,
+}) => {
   return (
     <C.item>
       <C.ButtonContainer>
@@ -21,7 +29,7 @@ const Item: React.FC<ItemInterface> = ({ name, date, type, descricao, value, id,
         <C.button color={colors.red} text={"#000"} onClick={() => del(id)}>
           <DeleteIcon></DeleteIcon>
         </C.button>
-        </C.ButtonContainer>
+      </C.ButtonContainer>
       <div className="flex-icon">
         {type === "ativo" ? (
           <AttachMoneyIcon style={{ color: colors.iconGreen }} />
@@ -32,7 +40,7 @@ const Item: React.FC<ItemInterface> = ({ name, date, type, descricao, value, id,
 
       <h3 className="titulo t-item">{name}</h3>
       <C.item_text>
-        Data: <span>{date && (formatDate(new Date(date)) )}</span>
+        Data: <span>{date && formatDate(new Date(date), "dd/mm/yyyy")}</span>
       </C.item_text>
       <C.item_text>
         tipo: <span>{type}</span>

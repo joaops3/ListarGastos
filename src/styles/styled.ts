@@ -191,3 +191,10 @@ export const ModalText = styled.div`
     font-weight: bold;
     text-align: center;
 `
+
+export const Select = styled.select`
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 5px;
+
+`
