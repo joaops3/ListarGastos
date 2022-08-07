@@ -1,6 +1,6 @@
 import * as C from "../styles/styled";
 import Item from "../components/Item";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useMemo } from "react";
 import { database } from "../firebase";
 import {
   collection,
@@ -24,12 +24,14 @@ const Main: React.FC = () => {
     setCards(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   }, []);
 
-  const filteredCards = cards.filter((card) => {
-    return card.date?.substring(5, 7) === month;
-  });
-  async function del(id: string) {
-    if(process.env.REACT_APP_SECRET ==="ADMIN"){
+  const filteredCards = useMemo(() => {
+    return cards.filter((card) => {
+      return card.date?.substring(5, 7) === month;
+    });
+  }, [cards]);
 
+  async function del(id: string) {
+    if (process.env.REACT_APP_SECRET === "ADMIN") {
       const item = doc(database, "card", id);
       await deleteDoc(item);
       setDeletar(deletar + 1);
