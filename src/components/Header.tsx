@@ -6,7 +6,10 @@ const Header: React.FC = () => {
     return ( 
         <header>
             <C.Nav>
-            <h2 ><Link to="/" className='link' style={{color: colors.home, margin: "15px"}}> HOME</Link></h2>
+            <C.Flex justify="space-between">
+            <h2 ><Link to="/" className='link-nav' style={{color: colors.home}}> HISTORICO</Link></h2>
+            <h2 ><Link to="/chart" className='link-nav' style={{color: colors.home}}>GRAFICO</Link></h2>
+            </C.Flex>
             <Link to="/cadastrar" className="link cadastrar"> <C.cadastrar color={colors.yellow}>CADASTRAR</C.cadastrar></Link>
             </C.Nav>
         </header>

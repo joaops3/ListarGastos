@@ -16,6 +16,15 @@
 
 .link {
   text-decoration: none;
+  
+  &-nav{
+    text-decoration: none;
+    margin: 15px;
+
+    &:hover{
+      text-decoration: underline;
+    }
+  }
 }
 
 .link.cadastrar {

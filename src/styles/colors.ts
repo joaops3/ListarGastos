@@ -13,7 +13,7 @@ export const colors: color ={
     blue: "#3567BF",
     red: "#DD2910",
     iconRed: "#B2212E",
-    iconGreen: "#368A57",
+    iconGreen: "#3BCC08",
     home: "#fff",
     sucess: "#7EE15B"
 }

@@ -32,6 +32,12 @@ export const cadastrar = styled.button`
     }
 `
 
+export const Flex = styled.nav<props>`
+    display: flex;
+    justify-content: ${props => props.justify};
+    align-items: center;
+`
+
 export const Nav = styled.nav`
     display:flex;
     justify-content: space-between;
