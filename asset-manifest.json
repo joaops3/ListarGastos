@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/ListarGastos/static/css/main.a3ae9a5f.css",
-    "main.js": "/ListarGastos/static/js/main.1a5312ea.js",
+    "main.js": "/ListarGastos/static/js/main.6c9b1eaa.js",
     "index.html": "/ListarGastos/index.html",
     "main.a3ae9a5f.css.map": "/ListarGastos/static/css/main.a3ae9a5f.css.map",
-    "main.1a5312ea.js.map": "/ListarGastos/static/js/main.1a5312ea.js.map"
+    "main.6c9b1eaa.js.map": "/ListarGastos/static/js/main.6c9b1eaa.js.map"
   },
   "entrypoints": [
     "static/css/main.a3ae9a5f.css",
-    "static/js/main.1a5312ea.js"
+    "static/js/main.6c9b1eaa.js"
   ]
 }
